@@ -1,4 +1,14 @@
 -------------------------------------------------------------------------------
 Test set: com.eronalves1996.SelfClosingTagTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec
+Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.026 sec <<< FAILURE!
+com.eronalves1996.SelfClosingTagTest.testParseElementWithSingleAttribute()  Time elapsed: 0.011 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <2> but was: <1>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:145)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:528)
+	at com.eronalves1996.SelfClosingTagTest.testParseElementWithSingleAttribute(SelfClosingTagTest.java:49)
+

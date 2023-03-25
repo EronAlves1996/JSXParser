@@ -21,4 +21,14 @@ public abstract class JSXToken {
         }
     }
 
+    public static class JSXAttributes extends JSXToken {
+        public boolean has(String type) {
+            return false;
+        }
+
+        public String get(String type) {
+            return null;
+        }
+    }
+
 }

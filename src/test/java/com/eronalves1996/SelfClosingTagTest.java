@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Iterator;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SelfClosingTagTest {
 
@@ -36,5 +35,28 @@ public class SelfClosingTagTest {
 
         JSXToken.JSXElementName name = (JSXToken.JSXElementName) jsxElementName;
         assertEquals("input", name.identifier);
+    }
+
+    @Test
+    public void testParseElementWithSingleAttribute(){
+        JSX inputWithSingleAttribute = JSX.parse("""
+                <input type="password" />
+                """);
+        JSXTokenIterator tokens = inputWithSingleAttribute.tokens();
+        JSXToken token = tokens.next();
+        List<JSXToken> jsxTokens = token.subTokens();
+
+        assertEquals(2, jsxTokens.size());
+
+        JSXToken jsxElementName = jsxTokens.get(0);
+        JSXToken jsxAttributes = jsxTokens.get(1);
+
+        JSXToken.JSXElementName name = (JSXToken.JSXElementName) jsxElementName;
+        JSXToken.JSXAttributes attributes = (JSXToken.JSXAttributes) jsxAttributes;
+
+        assertEquals("input", name.identifier);
+        assertNotNull(attributes);
+        assertTrue(attributes.has("type"));
+        assertEquals("password", attributes.get("type"));
     }
 }
