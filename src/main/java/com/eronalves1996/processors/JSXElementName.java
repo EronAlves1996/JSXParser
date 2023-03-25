@@ -9,8 +9,8 @@ public class JSXElementName extends JSXToken {
 
     @Override
     public String toString() {
-        return "JSXElementName{\n" +
-                "\tidentifier='" + identifier + '\'' +
-                "\n}";
+        return "JSXElementName{" +
+                "identifier='" + identifier + '\'' +
+                '}';
     }
 }

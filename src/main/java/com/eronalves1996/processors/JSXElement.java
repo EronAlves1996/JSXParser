@@ -9,8 +9,9 @@ public class JSXElement extends JSXToken {
 
     @Override
     public String toString() {
-        return "JSXElement{\n" +
-                "\ttokens=" + tokens +
-                "\n}";
+
+        return "JSXElement{" +
+                "tokens=" + tokens +
+                '}';
     }
 }

@@ -31,8 +31,8 @@ public class JSXAttributes extends JSXToken {
 
     @Override
     public String toString() {
-        return "JSXAttributes{\n" +
-                "\tattributes=" + attributes +
-                "\n}";
+        return "JSXAttributes{" +
+                "attributes=" + attributes +
+                '}';
     }
 }

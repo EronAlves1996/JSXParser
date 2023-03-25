@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.eronalves1996.SelfClosingTagTest
 -------------------------------------------------------------------------------
-<<<<<<< Updated upstream
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 sec
-=======
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 sec
->>>>>>> Stashed changes
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 sec

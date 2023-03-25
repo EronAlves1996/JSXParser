@@ -1,5 +1,7 @@
 package com.eronalves1996;
 
+import com.eronalves1996.processors.JSXToken;
+
 public class JSX {
 
     private final JSXToken tokens;
@@ -16,14 +18,10 @@ public class JSX {
     public JSXTokenIterator tokens() {
         return tokens.asIterator();
     }
-<<<<<<< Updated upstream
-=======
-
     @Override
     public String toString() {
-        return "JSX{\n" +
-                "\ttokens=" + tokens +
-                "\n}";
+        return "JSX{" +
+                "tokens=" + tokens +
+                '}';
     }
->>>>>>> Stashed changes
 }

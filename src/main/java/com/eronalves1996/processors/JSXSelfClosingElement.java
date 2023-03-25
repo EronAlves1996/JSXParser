@@ -40,8 +40,9 @@ public class JSXSelfClosingElement extends JSXToken {
 
     @Override
     public String toString() {
-        return "JSXSelfClosingElement{\n" +
-                "\tsubTokens=" + subTokens +
-                "\n}";
+        return "JSXSelfClosingElement{" +
+                "subTokens=" + subTokens +
+                '}';
+
     }
 }

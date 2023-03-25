@@ -1,8 +1,9 @@
 package com.eronalves1996;
 
+import com.eronalves1996.processors.JSXToken;
+
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 import java.util.function.Consumer;
 
 public class JSXTokenIterator implements Iterator<JSXToken> {
@@ -32,14 +33,11 @@ public class JSXTokenIterator implements Iterator<JSXToken> {
     public void forEachRemaining(Consumer<? super JSXToken> action) {
         iterator.forEachRemaining(action);
     }
-<<<<<<< Updated upstream
-=======
 
     @Override
     public String toString() {
-        return "JSXTokenIterator{\n" +
-                "\titerator=" + iterator +
-                "\n}";
+        return "JSXTokenIterator{" +
+                "iterator=" + iterator +
+                '}';
     }
->>>>>>> Stashed changes
 }
