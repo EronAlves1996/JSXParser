@@ -94,7 +94,25 @@ public class SelfClosingTagTest {
         JSX imgTag = JSX.parse("""
                 <img src="file/xscap" width="100" />
                 """);
+        JSXElement tokens = imgTag.tokens;
+        JSXToken topLevelToken = tokens.topLevelToken;
 
+        assertEquals(JSXSelfClosingElement.class, topLevelToken.getClass());
+
+        List<JSXToken> jsxTokens = topLevelToken.subTokens();
+
+        jsxTokens.iterator().forEachRemaining(token -> {
+            if(token instanceof JSXElementName) assertEquals("img", ((JSXElementName) token).identifier);
+            else if(token instanceof JSXAttributes) {
+                assertTrue(((JSXAttributes) token).has("src"));
+                assertTrue(((JSXAttributes) token).has("width"));
+                assertEquals("file/xscap", ((JSXAttributes) token).get("src"));
+                assertEquals("100", ((JSXAttributes) token).get("width"));
+            }
+            else {
+                throw new RuntimeException("Unexpected Token");
+            }
+        });
     }
 
 
