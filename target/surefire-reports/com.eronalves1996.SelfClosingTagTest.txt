@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.eronalves1996.SelfClosingTagTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.013 sec <<< FAILURE!
-com.eronalves1996.SelfClosingTagTest.testParseAJSXElementNameFromSelfClosingTag()  Time elapsed: 0.004 sec  <<< FAILURE!
-java.lang.NullPointerException: Cannot invoke "java.util.List.get(int)" because "subTokens" is null
-	at com.eronalves1996.SelfClosingTagTest.testParseAJSXElementNameFromSelfClosingTag(SelfClosingTagTest.java:32)
-
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec
