@@ -95,6 +95,10 @@ public abstract class JSXToken {
         public JSXAttributes(List<String> unparsedAttributes) {
             super();
             attributes = new HashMap<>();
+            parseAttributes(unparsedAttributes);
+        }
+
+        private void parseAttributes(List<String> unparsedAttributes) {
             unparsedAttributes.stream().forEach(attr -> {
                 String[] nameAndValue = attr.split("=");
                 attributes.put(nameAndValue[0], nameAndValue[1].replaceAll("\"", ""));
