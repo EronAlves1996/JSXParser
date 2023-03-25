@@ -4,20 +4,26 @@ import java.util.Iterator;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
-public class JSXTokenIterator implements Iterable<JSXToken> {
+public class JSXTokenIterator implements Iterator<JSXToken> {
+
 
     @Override
-    public Iterator<JSXToken> iterator() {
-        return null;
+    public boolean hasNext() {
+        return false;
     }
 
     @Override
-    public void forEach(Consumer<? super JSXToken> action) {
-        Iterable.super.forEach(action);
+    public JSXToken next() {
+        return new JSXToken.JSXSelfClosingElement();
     }
 
     @Override
-    public Spliterator<JSXToken> spliterator() {
-        return Iterable.super.spliterator();
+    public void remove() {
+        Iterator.super.remove();
+    }
+
+    @Override
+    public void forEachRemaining(Consumer<? super JSXToken> action) {
+        Iterator.super.forEachRemaining(action);
     }
 }

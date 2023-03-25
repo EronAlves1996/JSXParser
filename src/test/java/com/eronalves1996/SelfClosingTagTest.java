@@ -15,7 +15,7 @@ public class SelfClosingTagTest {
                 <input />
                 """);
 
-        Iterator<JSXToken> tokens = parsedInputTag.tokens().iterator();
+        Iterator<JSXToken> tokens = parsedInputTag.tokens();
         JSXToken token = tokens.next();
 
         assertNotNull(token);
