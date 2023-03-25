@@ -27,7 +27,7 @@ public abstract class JSXToken {
 
     public JSXTokenIterator asIterator() {
         if (this instanceof JSXElement){
-            return new JSXTokenIterator(((JSXElement) this).topLevelToken);
+            return new JSXTokenIterator(((JSXElement) this).topLevelTokens);
         }
         return null;
     }
