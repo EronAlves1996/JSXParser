@@ -1,9 +1,5 @@
 package com.eronalves1996;
 
-import com.eronalves1996.processors.JSXAttributes;
-import com.eronalves1996.processors.JSXElementName;
-import com.eronalves1996.processors.JSXSelfClosingElement;
-import com.eronalves1996.processors.JSXToken;
 import org.junit.jupiter.api.Test;
 import java.util.Iterator;
 import java.util.List;
@@ -23,7 +19,7 @@ public class SelfClosingTagTest {
         JSXToken token = tokens.next();
 
         assertNotNull(token);
-        assertEquals(JSXSelfClosingElement.class, token.getClass());
+        assertEquals(JSXToken.JSXSelfClosingElement.class, token.getClass());
     }
 
     @Test
@@ -35,9 +31,9 @@ public class SelfClosingTagTest {
         JSXToken jsxElementName = subTokens.get(0);
 
         assertEquals(1, subTokens.size());
-        assertEquals(JSXElementName.class, jsxElementName.getClass());
+        assertEquals(JSXToken.JSXElementName.class, jsxElementName.getClass());
 
-        JSXElementName name = (JSXElementName) jsxElementName;
+        JSXToken.JSXElementName name = (JSXToken.JSXElementName) jsxElementName;
         assertEquals("input", name.identifier);
     }
 
@@ -55,8 +51,8 @@ public class SelfClosingTagTest {
         JSXToken jsxElementName = jsxTokens.get(0);
         JSXToken jsxAttributes = jsxTokens.get(1);
 
-        JSXElementName name = (JSXElementName) jsxElementName;
-        JSXAttributes attributes = (JSXAttributes) jsxAttributes;
+        JSXToken.JSXElementName name = (JSXToken.JSXElementName) jsxElementName;
+        JSXToken.JSXAttributes attributes = (JSXToken.JSXAttributes) jsxAttributes;
 
         assertEquals("input", name.identifier);
         assertNotNull(attributes);

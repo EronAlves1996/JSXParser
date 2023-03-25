@@ -1,7 +1,5 @@
 package com.eronalves1996;
 
-import com.eronalves1996.processors.JSXToken;
-
 public class JSX {
 
     private final JSXToken tokens;
@@ -17,12 +15,5 @@ public class JSX {
 
     public JSXTokenIterator tokens() {
         return tokens.asIterator();
-    }
-
-    @Override
-    public String toString() {
-        return "JSX{" +
-                "tokens=" + tokens +
-                '}';
     }
 }
