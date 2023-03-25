@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="3" failures="0" name="com.eronalves1996.SelfClosingTagTest" time="0.014" errors="0" skipped="0">
+<testsuite tests="3" failures="0" name="com.eronalves1996.SelfClosingTagTest" time="0.006" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="19.0.2+9"/>
@@ -57,7 +57,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.cpu.endian" value="little"/>
   </properties>
-  <testcase classname="com.eronalves1996.SelfClosingTagTest" name="com.eronalves1996.SelfClosingTagTest.testParseAJSXElementNameFromSelfClosingTag" time="0.007"/>
-  <testcase classname="com.eronalves1996.SelfClosingTagTest" name="com.eronalves1996.SelfClosingTagTest.testParseElementWithSingleAttribute" time="0.005"/>
   <testcase classname="com.eronalves1996.SelfClosingTagTest" name="com.eronalves1996.SelfClosingTagTest.testSelfClosingTag" time="0.002"/>
+  <testcase classname="com.eronalves1996.SelfClosingTagTest" name="com.eronalves1996.SelfClosingTagTest.testParseAJSXElementNameFromSelfClosingTag" time="0"/>
+  <testcase classname="com.eronalves1996.SelfClosingTagTest" name="com.eronalves1996.SelfClosingTagTest.testParseElementWithSingleAttribute" time="0.004"/>
 </testsuite>

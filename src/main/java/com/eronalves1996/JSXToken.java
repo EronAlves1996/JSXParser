@@ -6,15 +6,22 @@ import java.util.stream.Collectors;
 public abstract class JSXToken {
 
     public static JSXElement tokenize(String code) {
-        String[] splittedTags = code.split("<");
-        Optional<JSXSelfClosingElement> collect = Arrays.stream(splittedTags)
+        String[] tags = identifyTags(code);
+        Optional<JSXSelfClosingElement> jsxTree = mountJSXTokenTree(tags);
+        return new JSXElement(jsxTree.get());
+    }
+
+    private static Optional<JSXSelfClosingElement> mountJSXTokenTree(String[] tags) {
+        return Arrays.stream(tags)
                 .filter(s -> !s.isEmpty())
                 .map(String::trim)
                 .map(s -> s.endsWith("/>") ? new JSXSelfClosingElement(s) : null)
                 .filter(Objects::nonNull)
                 .findFirst();
+    }
 
-        return new JSXElement(collect.get());
+    private static String[] identifyTags(String code) {
+        return code.split("<");
     }
 
     public JSXTokenIterator asIterator() {
