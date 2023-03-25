@@ -1,6 +1,7 @@
-com/eronalves1996/JSX.class
 com/eronalves1996/JSXToken.class
 com/eronalves1996/JSXTokenIterator.class
-com/eronalves1996/JSXToken$JSXAttributes.class
 com/eronalves1996/JSXToken$JSXSelfClosingElement.class
 com/eronalves1996/JSXToken$JSXElementName.class
+com/eronalves1996/JSX.class
+com/eronalves1996/JSXToken$JSXAttributes.class
+com/eronalves1996/JSXToken$JSXElement.class

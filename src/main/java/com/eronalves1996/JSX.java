@@ -2,14 +2,18 @@ package com.eronalves1996;
 
 public class JSX {
 
+    private final JSXToken tokens;
+
     public static JSX parse(String code){
         return new JSX(code);
     }
 
-    private JSX(String code){}
+    private JSX(String code){
+        tokens = JSXToken.tokenize(code);
+    }
 
 
     public JSXTokenIterator tokens() {
-        return new JSXTokenIterator();
+        return tokens.asIterator();
     }
 }
