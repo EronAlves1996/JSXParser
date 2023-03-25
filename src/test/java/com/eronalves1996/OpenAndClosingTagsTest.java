@@ -10,38 +10,17 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class OpenAndClosingTagsTest {
 
 
     @Test
-    public void testSimpleOpenAndClosingTags() {
-        JSX htmlOpenAndClosingTag = JSX.parse("""
+    public void testShouldProduceErrorAboutEmptyOpenAndClosingTags() {
+        assertThrows(RuntimeException.class, ()-> JSX.parse("""
                 <html>
                 </html>
-                """);
-        JSXElement element = htmlOpenAndClosingTag.tokens;
-        List<JSXToken> tokens = (List<JSXToken>) element.topLevelTokens;
-
-        assertEquals(2, tokens.size());
-
-        JSXToken openingTag = tokens.get(0);
-
-        assertElement(openingTag)
-                .isType(JSXOpeningElement.class)
-                .subTokenQuantity(1)
-                .has(JSXElementName.class)
-                .innerNameIs("html");
-
-        JSXToken closingTag = tokens.get(1);
-
-        assertElement(closingTag)
-                .isType(JSXClosingElement.class)
-                .subTokenQuantity(1)
-                .has(JSXElementName.class)
-                .innerNameIs("html");
+                """));
     }
 
     private AssertToken assertElement(JSXToken token){

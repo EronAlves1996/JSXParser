@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="1" name="com.eronalves1996.OpenAndClosingTagsTest" time="0.002" errors="0" skipped="0">
+<testsuite tests="1" failures="1" name="com.eronalves1996.OpenAndClosingTagsTest" time="0.007" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="19.0.2+9"/>
@@ -57,13 +57,13 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.cpu.endian" value="little"/>
   </properties>
-  <testcase classname="com.eronalves1996.OpenAndClosingTagsTest" name="com.eronalves1996.OpenAndClosingTagsTest.testSimpleOpenAndClosingTags" time="0.002">
-    <failure message="No value present" type="java.util.NoSuchElementException">java.util.NoSuchElementException: No value present
-	at java.base/java.util.Optional.get(Optional.java:143)
-	at com.eronalves1996.processors.JSXToken.tokenize(JSXToken.java:12)
-	at com.eronalves1996.JSX.&lt;init&gt;(JSX.java:15)
-	at com.eronalves1996.JSX.parse(JSX.java:11)
-	at com.eronalves1996.OpenAndClosingTagsTest.testSimpleOpenAndClosingTags(OpenAndClosingTagsTest.java:21)
+  <testcase classname="com.eronalves1996.OpenAndClosingTagsTest" name="com.eronalves1996.OpenAndClosingTagsTest.testShouldProduceErrorAboutEmptyOpenAndClosingTags" time="0.007">
+    <failure message="Expected java.lang.RuntimeException to be thrown, but nothing was thrown." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: Expected java.lang.RuntimeException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3083)
+	at com.eronalves1996.OpenAndClosingTagsTest.testShouldProduceErrorAboutEmptyOpenAndClosingTags(OpenAndClosingTagsTest.java:20)
 </failure>
   </testcase>
 </testsuite>

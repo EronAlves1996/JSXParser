@@ -10,7 +10,7 @@ public class JSXSelfClosingElement extends JSXToken {
     public JSXSelfClosingElement(String s){
         subTokens = new ArrayList<>();
 
-        String sanitizedElementInfo = sanitizeElementInfo(s);
+        String sanitizedElementInfo = s.replace("/>", "");
         String[] unparsedSubTokens = sanitizedElementInfo.split(" ");
 
         parseElementName(unparsedSubTokens);
@@ -27,10 +27,6 @@ public class JSXSelfClosingElement extends JSXToken {
             JSXAttributes attributes = new JSXAttributes(Arrays.asList(unparsedSubTokens).subList(1, unparsedSubTokens.length));
             subTokens.add(attributes);
         }
-    }
-
-    private static String sanitizeElementInfo(String s) {
-        return s.replace("/>", "");
     }
 
     @Override
