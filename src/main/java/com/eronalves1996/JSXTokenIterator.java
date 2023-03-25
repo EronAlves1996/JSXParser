@@ -32,4 +32,14 @@ public class JSXTokenIterator implements Iterator<JSXToken> {
     public void forEachRemaining(Consumer<? super JSXToken> action) {
         iterator.forEachRemaining(action);
     }
+<<<<<<< Updated upstream
+=======
+
+    @Override
+    public String toString() {
+        return "JSXTokenIterator{\n" +
+                "\titerator=" + iterator +
+                "\n}";
+    }
+>>>>>>> Stashed changes
 }

@@ -1,3 +1,7 @@
-/home/eronads/repos/java/JSXParser/src/main/java/com/eronalves1996/JSXToken.java
+/home/eronads/repos/java/JSXParser/src/main/java/com/eronalves1996/processors/JSXElement.java
+/home/eronads/repos/java/JSXParser/src/main/java/com/eronalves1996/processors/JSXToken.java
 /home/eronads/repos/java/JSXParser/src/main/java/com/eronalves1996/JSX.java
 /home/eronads/repos/java/JSXParser/src/main/java/com/eronalves1996/JSXTokenIterator.java
+/home/eronads/repos/java/JSXParser/src/main/java/com/eronalves1996/processors/JSXSelfClosingElement.java
+/home/eronads/repos/java/JSXParser/src/main/java/com/eronalves1996/processors/JSXAttributes.java
+/home/eronads/repos/java/JSXParser/src/main/java/com/eronalves1996/processors/JSXElementName.java

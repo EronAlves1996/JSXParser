@@ -16,4 +16,14 @@ public class JSX {
     public JSXTokenIterator tokens() {
         return tokens.asIterator();
     }
+<<<<<<< Updated upstream
+=======
+
+    @Override
+    public String toString() {
+        return "JSX{\n" +
+                "\ttokens=" + tokens +
+                "\n}";
+    }
+>>>>>>> Stashed changes
 }

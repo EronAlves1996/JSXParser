@@ -59,4 +59,35 @@ public class SelfClosingTagTest {
         assertTrue(attributes.has("type"));
         assertEquals("password", attributes.get("type"));
     }
+
+    @Test
+    public void testParseElementWithManyAttributes(){
+        JSX inputWithManyAttributes = JSX.parse("""
+                <input type="password" id="ximenes" class="mauricio-vieira" />
+                """);
+
+        System.out.println(inputWithManyAttributes);
+        JSXTokenIterator tokens = inputWithManyAttributes.tokens();
+        JSXToken nextToken = tokens.next();
+
+        assertEquals(JSXSelfClosingElement.class, nextToken.getClass());
+
+        List<JSXToken> jsxTokens = nextToken.subTokens();
+
+        assertEquals(2, jsxTokens.size());
+
+        jsxTokens.iterator().forEachRemaining(token -> {
+            if (token instanceof JSXElementName) assertEquals(((JSXElementName) token).identifier, "input");
+            else if (token instanceof JSXAttributes) {
+                assertTrue(((JSXAttributes) token).has("type"));
+                assertTrue(((JSXAttributes) token).has("id"));
+                assertTrue(((JSXAttributes) token).has("class"));
+
+                assertEquals("password", ((JSXAttributes) token).get("type"));
+                assertEquals("ximenes", ((JSXAttributes) token).get("id"));
+                assertEquals("mauricio-vieira", ((JSXAttributes) token).get("class"));
+            }
+        });
+    }
+
 }
