@@ -22,7 +22,7 @@ public abstract class JSXToken {
     private static String[] identifyTags(String code) {
         return code.split("<");
     }
-    
+
 
     public List<JSXToken> subTokens(){
         return new ArrayList<>();
