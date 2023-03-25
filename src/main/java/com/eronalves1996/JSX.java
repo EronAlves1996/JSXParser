@@ -1,10 +1,11 @@
 package com.eronalves1996;
 
+import com.eronalves1996.processors.JSXElement;
 import com.eronalves1996.processors.JSXToken;
 
 public class JSX {
 
-    private final JSXToken tokens;
+    public final JSXElement tokens;
 
     public static JSX parse(String code){
         return new JSX(code);
@@ -14,10 +15,6 @@ public class JSX {
         tokens = JSXToken.tokenize(code);
     }
 
-
-    public JSXTokenIterator tokens() {
-        return tokens.asIterator();
-    }
     @Override
     public String toString() {
         return "JSX{" +

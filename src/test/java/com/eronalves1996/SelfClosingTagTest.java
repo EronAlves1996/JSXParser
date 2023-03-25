@@ -1,11 +1,8 @@
 package com.eronalves1996;
 
-import com.eronalves1996.processors.JSXAttributes;
-import com.eronalves1996.processors.JSXElementName;
-import com.eronalves1996.processors.JSXSelfClosingElement;
-import com.eronalves1996.processors.JSXToken;
+import com.eronalves1996.processors.*;
 import org.junit.jupiter.api.Test;
-import java.util.Iterator;
+
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,8 +16,8 @@ public class SelfClosingTagTest {
     @Test
     public void testSelfClosingTag()
     {
-        Iterator<JSXToken> tokens = parsedInputTag.tokens();
-        JSXToken token = tokens.next();
+        JSXElement tokens = parsedInputTag.tokens;
+        JSXToken token = tokens.topLevelToken;;
 
         assertNotNull(token);
         assertEquals(JSXSelfClosingElement.class, token.getClass());
@@ -28,8 +25,8 @@ public class SelfClosingTagTest {
 
     @Test
     public void testParseAJSXElementNameFromSelfClosingTag() {
-        JSXTokenIterator tokens = parsedInputTag.tokens();
-        JSXToken token = tokens.next();
+        JSXElement tokens = parsedInputTag.tokens;
+        JSXToken token = tokens.topLevelToken;
 
         List<JSXToken> subTokens = token.subTokens();
         JSXToken jsxElementName = subTokens.get(0);
@@ -46,9 +43,9 @@ public class SelfClosingTagTest {
         JSX inputWithSingleAttribute = JSX.parse("""
                 <input type="password" />
                 """);
-        JSXTokenIterator tokens = inputWithSingleAttribute.tokens();
-        JSXToken token = tokens.next();
-        List<JSXToken> jsxTokens = token.subTokens();
+        JSXElement tokens = inputWithSingleAttribute.tokens;
+        JSXToken topLevelToken = tokens.topLevelToken;
+        List<JSXToken> jsxTokens = topLevelToken.subTokens();
 
         assertEquals(2, jsxTokens.size());
 
@@ -69,18 +66,16 @@ public class SelfClosingTagTest {
         JSX inputWithManyAttributes = JSX.parse("""
                 <input type="password" id="ximenes" class="mauricio-vieira" />
                 """);
+        JSXElement tokens = inputWithManyAttributes.tokens;
+        JSXToken topLevelToken = tokens.topLevelToken;
 
-        System.out.println(inputWithManyAttributes);
-        JSXTokenIterator tokens = inputWithManyAttributes.tokens();
-        JSXToken nextToken = tokens.next();
+        assertEquals(JSXSelfClosingElement.class, topLevelToken.getClass());
 
-        assertEquals(JSXSelfClosingElement.class, nextToken.getClass());
+        List<JSXToken> subTokens = topLevelToken.subTokens();
 
-        List<JSXToken> jsxTokens = nextToken.subTokens();
+        assertEquals(2, subTokens.size());
 
-        assertEquals(2, jsxTokens.size());
-
-        jsxTokens.iterator().forEachRemaining(token -> {
+        subTokens.iterator().forEachRemaining(token -> {
             if (token instanceof JSXElementName) assertEquals(((JSXElementName) token).identifier, "input");
             else if (token instanceof JSXAttributes) {
                 assertTrue(((JSXAttributes) token).has("type"));
@@ -93,5 +88,14 @@ public class SelfClosingTagTest {
             }
         });
     }
+
+    @Test
+    public void differentSelfClosedTagWithManyAttributes(){
+        JSX imgTag = JSX.parse("""
+                <img src="file/xscap" width="100" />
+                """);
+
+    }
+
 
 }

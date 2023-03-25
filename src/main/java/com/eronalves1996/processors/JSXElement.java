@@ -1,17 +1,17 @@
 package com.eronalves1996.processors;
 
 public class JSXElement extends JSXToken {
-    JSXToken tokens;
+    public JSXToken topLevelToken;
 
     public JSXElement(JSXToken tokens){
-        this.tokens = tokens;
+        this.topLevelToken = tokens;
     }
 
     @Override
     public String toString() {
-
         return "JSXElement{" +
-                "tokens=" + tokens +
+                "tokens=" + topLevelToken +
                 '}';
     }
+
 }
