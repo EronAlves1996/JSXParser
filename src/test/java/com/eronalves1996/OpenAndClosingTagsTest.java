@@ -1,10 +1,6 @@
 package com.eronalves1996;
 
-import com.eronalves1996.processors.JSXElement;
-import com.eronalves1996.processors.JSXElementName;
-import com.eronalves1996.processors.JSXToken;
-import com.eronalves1996.processors.JSXOpeningElement;
-import com.eronalves1996.processors.JSXClosingElement;
+import com.eronalves1996.tokens.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -21,6 +17,43 @@ public class OpenAndClosingTagsTest {
                 <html>
                 </html>
                 """));
+    }
+
+    @Test
+    public void testShouldParseOpeningAndClosingTagsWithInnerText(){
+        JSX divElementWithInnerText = JSX.parse("""
+                <div>
+                    This is a test text
+                </div>
+                """);
+        JSXElement tokens = divElementWithInnerText.tokens;
+        List<JSXToken> topLevelTokens = tokens.topLevelTokens;
+        topLevelTokens.stream().forEach(token -> {
+            if(token instanceof JSXOpeningElement) {
+                List<JSXToken> jsxTokens = token.subTokens();
+                assertEquals(1, jsxTokens.size());
+
+                JSXElementName jsxElementName = (JSXElementName) jsxTokens.get(0);
+                assertEquals("div", jsxElementName.identifier);
+            }
+
+            if(token instanceof JSXChild) {
+                List<JSXToken> jsxTokens = token.subTokens();
+
+                assertEquals(1, jsxTokens.size());
+                assertTrue(jsxTokens.get(0) instanceof JSXText);
+
+                assertEquals("This is a test text", ((JSXText) jsxTokens.get(0)).value);
+            }
+
+            if(token instanceof JSXClosingElement) {
+                List<JSXToken> jsxTokens = token.subTokens();
+                assertEquals(1, jsxTokens.size());
+
+                JSXElementName jsxElementName = (JSXElementName) jsxTokens.get(0);
+                assertEquals("div", jsxElementName.identifier);
+            }
+        });
     }
 
     private AssertToken assertElement(JSXToken token){

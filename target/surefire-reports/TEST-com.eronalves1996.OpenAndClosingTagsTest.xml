@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="1" name="com.eronalves1996.OpenAndClosingTagsTest" time="0.007" errors="0" skipped="0">
+<testsuite tests="2" failures="1" name="com.eronalves1996.OpenAndClosingTagsTest" time="0.011" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="19.0.2+9"/>
@@ -57,13 +57,29 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.cpu.endian" value="little"/>
   </properties>
-  <testcase classname="com.eronalves1996.OpenAndClosingTagsTest" name="com.eronalves1996.OpenAndClosingTagsTest.testShouldProduceErrorAboutEmptyOpenAndClosingTags" time="0.007">
-    <failure message="Expected java.lang.RuntimeException to be thrown, but nothing was thrown." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: Expected java.lang.RuntimeException to be thrown, but nothing was thrown.
-	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
-	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
-	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
-	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3083)
-	at com.eronalves1996.OpenAndClosingTagsTest.testShouldProduceErrorAboutEmptyOpenAndClosingTags(OpenAndClosingTagsTest.java:20)
+  <testcase classname="com.eronalves1996.OpenAndClosingTagsTest" name="com.eronalves1996.OpenAndClosingTagsTest.testShouldProduceErrorAboutEmptyOpenAndClosingTags" time="0.007"/>
+  <testcase classname="com.eronalves1996.OpenAndClosingTagsTest" name="com.eronalves1996.OpenAndClosingTagsTest.testShouldParseOpeningAndClosingTagsWithInnerText" time="0.004">
+    <failure message="This tag was not opened in JSXTree" type="java.lang.RuntimeException">java.lang.RuntimeException: This tag was not opened in JSXTree
+	at com.eronalves1996.tokens.JSXClosingElement.&lt;init&gt;(JSXClosingElement.java:20)
+	at com.eronalves1996.tokens.JSXToken.lambda$mountJSXTokenTree$1(JSXToken.java:28)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:1006)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:682)
+	at com.eronalves1996.tokens.JSXToken.mountJSXTokenTree(JSXToken.java:32)
+	at com.eronalves1996.tokens.JSXToken.tokenize(JSXToken.java:16)
+	at com.eronalves1996.JSX.&lt;init&gt;(JSX.java:15)
+	at com.eronalves1996.JSX.parse(JSX.java:11)
+	at com.eronalves1996.OpenAndClosingTagsTest.testShouldParseOpeningAndClosingTagsWithInnerText(OpenAndClosingTagsTest.java:24)
 </failure>
+    <system-out>pop = div
+    This is a test text
+sanitized name = div
+</system-out>
   </testcase>
 </testsuite>

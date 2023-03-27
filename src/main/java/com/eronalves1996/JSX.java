@@ -1,7 +1,7 @@
 package com.eronalves1996;
 
-import com.eronalves1996.processors.JSXElement;
-import com.eronalves1996.processors.JSXToken;
+import com.eronalves1996.tokens.JSXElement;
+import com.eronalves1996.tokens.JSXToken;
 
 public class JSX {
 

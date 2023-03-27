@@ -1,4 +1,4 @@
-package com.eronalves1996.processors;
+package com.eronalves1996.tokens;
 
 import java.util.HashMap;
 import java.util.List;

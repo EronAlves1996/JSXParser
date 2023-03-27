@@ -1,6 +1,6 @@
 package com.eronalves1996;
 
-import com.eronalves1996.processors.*;
+import com.eronalves1996.tokens.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public class SelfClosingTagTest {
     public void testSelfClosingTag()
     {
         JSXElement tokens = parsedInputTag.tokens;
-        JSXToken token = tokens.topLevelTokens;;
+        JSXToken token = tokens.topLevelTokens.get(0);
 
         assertNotNull(token);
         assertEquals(JSXSelfClosingElement.class, token.getClass());
@@ -26,7 +26,7 @@ public class SelfClosingTagTest {
     @Test
     public void testParseAJSXElementNameFromSelfClosingTag() {
         JSXElement tokens = parsedInputTag.tokens;
-        JSXToken token = tokens.topLevelTokens;
+        JSXToken token = tokens.topLevelTokens.get(0);
 
         List<JSXToken> subTokens = token.subTokens();
         JSXToken jsxElementName = subTokens.get(0);
@@ -44,7 +44,7 @@ public class SelfClosingTagTest {
                 <input type="password" />
                 """);
         JSXElement tokens = inputWithSingleAttribute.tokens;
-        JSXToken topLevelToken = tokens.topLevelTokens;
+        JSXToken topLevelToken = tokens.topLevelTokens.get(0);
         List<JSXToken> jsxTokens = topLevelToken.subTokens();
 
         assertEquals(2, jsxTokens.size());
@@ -67,7 +67,7 @@ public class SelfClosingTagTest {
                 <input type="password" id="ximenes" class="mauricio-vieira" />
                 """);
         JSXElement tokens = inputWithManyAttributes.tokens;
-        JSXToken topLevelToken = tokens.topLevelTokens;
+        JSXToken topLevelToken = tokens.topLevelTokens.get(0);
 
         assertEquals(JSXSelfClosingElement.class, topLevelToken.getClass());
 
@@ -96,7 +96,7 @@ public class SelfClosingTagTest {
                 """);
         System.out.println(imgTag);
         JSXElement tokens = imgTag.tokens;
-        JSXToken topLevelToken = tokens.topLevelTokens;
+        JSXToken topLevelToken = tokens.topLevelTokens.get(0);
 
         assertEquals(JSXSelfClosingElement.class, topLevelToken.getClass());
 

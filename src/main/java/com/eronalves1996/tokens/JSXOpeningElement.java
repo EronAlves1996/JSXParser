@@ -1,4 +1,4 @@
-package com.eronalves1996.processors;
+package com.eronalves1996.tokens;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +11,10 @@ public class JSXOpeningElement extends JSXToken {
         super();
         subtokens = new ArrayList<>();
         String sanitizedName = s.replace(">", "").trim();
-        JSXElementName jsxElementName = new JSXElementName(sanitizedName);
 
+        this.validator.add(sanitizedName);
+
+        JSXElementName jsxElementName = new JSXElementName(sanitizedName);
         subtokens.add(jsxElementName);
     }
 }

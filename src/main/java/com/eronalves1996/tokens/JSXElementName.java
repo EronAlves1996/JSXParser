@@ -1,4 +1,4 @@
-package com.eronalves1996.processors;
+package com.eronalves1996.tokens;
 
 public class JSXElementName extends JSXToken {
     public String identifier;
