@@ -10,7 +10,7 @@ public class JSXOpeningElement extends JSXToken {
     public JSXOpeningElement(String s) {
         super();
         subtokens = new ArrayList<>();
-        String sanitizedName = s.replace(">", "").trim();
+        String sanitizedName = s.split(">")[0].trim();
 
         this.validator.add(sanitizedName);
 
