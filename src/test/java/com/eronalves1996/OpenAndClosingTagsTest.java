@@ -52,7 +52,7 @@ public class OpenAndClosingTagsTest {
         });
     }
 
-    /*@Test
+    @Test
     public void testShouldParseCorrectlyAttributes(){
         JSX divElementWithTextAndAttributes = JSX.parse("""
                 <div class="test" id="test-id" style="color: blue">
@@ -62,10 +62,23 @@ public class OpenAndClosingTagsTest {
 
         JSXElement tokens = divElementWithTextAndAttributes.tokens;
         List<JSXToken> topLevelTokens = tokens.topLevelTokens;
+        topLevelTokens.stream().forEach(token -> {
+            if(token instanceof JSXOpeningElement){
+                assertElement(token)
+                        .subTokenQuantity(2)
+                        .has(JSXElementName.class)
+                        .has(JSXAttributes.class)
+                        .assertAttribute("class", "test")
+                        .assertAttribute("id", "test-id")
+                        .assertAttribute("style", "color:blue");
+            }
 
+            if(token instanceof  JSXClosingElement){
+                assertElement(token)
+                        .subTokenQuantity(1);
+            }
+        });
     }
-
-     */
 
     private AssertToken assertElement(JSXToken token){
         return new AssertToken(){
@@ -108,6 +121,18 @@ public class OpenAndClosingTagsTest {
                 return assertElement(token);
             }
 
+            @Override
+            public AssertToken assertAttribute(String name, String value) {
+                Optional<JSXToken> first = token.subTokens().stream().filter(t -> t.getClass() == JSXAttributes.class).findFirst();
+                if(first.isEmpty()) throw new RuntimeException("There's no valid element with attributes");
+                JSXAttributes jsxAttributes = (JSXAttributes) first.get();
+
+                assertTrue(jsxAttributes.has(name));
+                assertEquals(value, jsxAttributes.get(name));
+
+                return assertElement(token);
+            }
+
 
         };
     }
@@ -118,6 +143,7 @@ public class OpenAndClosingTagsTest {
         AssertToken has (Class clazz);
         AssertToken innerNameIs(String string);
         AssertToken innerTextIs(String string);
+        AssertToken assertAttribute(String name, String value);
 
     }
 }

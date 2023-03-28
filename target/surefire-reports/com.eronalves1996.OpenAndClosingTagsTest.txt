@@ -1,4 +1,15 @@
 -------------------------------------------------------------------------------
 Test set: com.eronalves1996.OpenAndClosingTagsTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.013 sec <<< FAILURE!
+com.eronalves1996.OpenAndClosingTagsTest.testShouldParseCorrectlyAttributes()  Time elapsed: 0.008 sec  <<< FAILURE!
+java.lang.RuntimeException: This tag was not opened in JSXTree
+	at com.eronalves1996.tokens.JSXClosingElement.<init>(JSXClosingElement.java:17)
+	at com.eronalves1996.tokens.JSXToken.defineTag(JSXToken.java:86)
+	at com.eronalves1996.tokens.JSXToken.parseRestString(JSXToken.java:81)
+	at com.eronalves1996.tokens.JSXToken.mountJSXTokenTree(JSXToken.java:38)
+	at com.eronalves1996.tokens.JSXToken.tokenize(JSXToken.java:16)
+	at com.eronalves1996.JSX.<init>(JSX.java:15)
+	at com.eronalves1996.JSX.parse(JSX.java:11)
+	at com.eronalves1996.OpenAndClosingTagsTest.testShouldParseCorrectlyAttributes(OpenAndClosingTagsTest.java:57)
+

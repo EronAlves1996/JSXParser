@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="2" failures="0" name="com.eronalves1996.OpenAndClosingTagsTest" time="0" errors="0" skipped="0">
+<testsuite tests="3" failures="1" name="com.eronalves1996.OpenAndClosingTagsTest" time="0.013" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="19.0.2+9"/>
@@ -58,5 +58,17 @@
     <property name="sun.cpu.endian" value="little"/>
   </properties>
   <testcase classname="com.eronalves1996.OpenAndClosingTagsTest" name="com.eronalves1996.OpenAndClosingTagsTest.testShouldProduceErrorAboutEmptyOpenAndClosingTags" time="0"/>
-  <testcase classname="com.eronalves1996.OpenAndClosingTagsTest" name="com.eronalves1996.OpenAndClosingTagsTest.testShouldParseOpeningAndClosingTagsWithInnerText" time="0"/>
+  <testcase classname="com.eronalves1996.OpenAndClosingTagsTest" name="com.eronalves1996.OpenAndClosingTagsTest.testShouldParseOpeningAndClosingTagsWithInnerText" time="0.005"/>
+  <testcase classname="com.eronalves1996.OpenAndClosingTagsTest" name="com.eronalves1996.OpenAndClosingTagsTest.testShouldParseCorrectlyAttributes" time="0.008">
+    <failure message="This tag was not opened in JSXTree" type="java.lang.RuntimeException">java.lang.RuntimeException: This tag was not opened in JSXTree
+	at com.eronalves1996.tokens.JSXClosingElement.&lt;init&gt;(JSXClosingElement.java:17)
+	at com.eronalves1996.tokens.JSXToken.defineTag(JSXToken.java:86)
+	at com.eronalves1996.tokens.JSXToken.parseRestString(JSXToken.java:81)
+	at com.eronalves1996.tokens.JSXToken.mountJSXTokenTree(JSXToken.java:38)
+	at com.eronalves1996.tokens.JSXToken.tokenize(JSXToken.java:16)
+	at com.eronalves1996.JSX.&lt;init&gt;(JSX.java:15)
+	at com.eronalves1996.JSX.parse(JSX.java:11)
+	at com.eronalves1996.OpenAndClosingTagsTest.testShouldParseCorrectlyAttributes(OpenAndClosingTagsTest.java:57)
+</failure>
+  </testcase>
 </testsuite>
