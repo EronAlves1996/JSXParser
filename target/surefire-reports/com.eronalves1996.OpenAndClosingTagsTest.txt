@@ -1,12 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.eronalves1996.OpenAndClosingTagsTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec <<< FAILURE!
-com.eronalves1996.OpenAndClosingTagsTest.testShouldParseOpeningAndClosingTagsWithInnerText()  Time elapsed: 0.001 sec  <<< FAILURE!
-java.lang.RuntimeException: You should use a self-closing tag
-	at com.eronalves1996.tokens.JSXElement.<init>(JSXElement.java:9)
-	at com.eronalves1996.tokens.JSXToken.tokenize(JSXToken.java:17)
-	at com.eronalves1996.JSX.<init>(JSX.java:15)
-	at com.eronalves1996.JSX.parse(JSX.java:11)
-	at com.eronalves1996.OpenAndClosingTagsTest.testShouldParseOpeningAndClosingTagsWithInnerText(OpenAndClosingTagsTest.java:24)
-
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec

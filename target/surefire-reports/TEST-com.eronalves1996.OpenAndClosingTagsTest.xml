@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="2" failures="1" name="com.eronalves1996.OpenAndClosingTagsTest" time="0.001" errors="0" skipped="0">
+<testsuite tests="2" failures="0" name="com.eronalves1996.OpenAndClosingTagsTest" time="0" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="19.0.2+9"/>
@@ -58,16 +58,5 @@
     <property name="sun.cpu.endian" value="little"/>
   </properties>
   <testcase classname="com.eronalves1996.OpenAndClosingTagsTest" name="com.eronalves1996.OpenAndClosingTagsTest.testShouldProduceErrorAboutEmptyOpenAndClosingTags" time="0"/>
-  <testcase classname="com.eronalves1996.OpenAndClosingTagsTest" name="com.eronalves1996.OpenAndClosingTagsTest.testShouldParseOpeningAndClosingTagsWithInnerText" time="0.001">
-    <failure message="You should use a self-closing tag" type="java.lang.RuntimeException">java.lang.RuntimeException: You should use a self-closing tag
-	at com.eronalves1996.tokens.JSXElement.&lt;init&gt;(JSXElement.java:9)
-	at com.eronalves1996.tokens.JSXToken.tokenize(JSXToken.java:17)
-	at com.eronalves1996.JSX.&lt;init&gt;(JSX.java:15)
-	at com.eronalves1996.JSX.parse(JSX.java:11)
-	at com.eronalves1996.OpenAndClosingTagsTest.testShouldParseOpeningAndClosingTagsWithInnerText(OpenAndClosingTagsTest.java:24)
-</failure>
-    <system-out>pop = div
-sanitized name = div
-</system-out>
-  </testcase>
+  <testcase classname="com.eronalves1996.OpenAndClosingTagsTest" name="com.eronalves1996.OpenAndClosingTagsTest.testShouldParseOpeningAndClosingTagsWithInnerText" time="0"/>
 </testsuite>

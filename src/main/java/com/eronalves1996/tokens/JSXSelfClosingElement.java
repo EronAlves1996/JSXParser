@@ -10,6 +10,7 @@ public class JSXSelfClosingElement extends JSXToken {
     public JSXSelfClosingElement(String s){
         subTokens = new ArrayList<>();
 
+        System.out.println("new selfclosing=" + s);
         String sanitizedElementInfo = s.replace("/>", "");
         String[] unparsedSubTokens = sanitizedElementInfo.split(" ");
 

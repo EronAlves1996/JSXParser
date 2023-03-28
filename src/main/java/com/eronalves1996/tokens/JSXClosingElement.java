@@ -12,14 +12,15 @@ public class JSXClosingElement extends JSXToken {
         super();
         subTokens = new ArrayList<>();
 
-        String sanitizedElementName = s.replace(">", "").replace("/","");
-
         String pop = this.validator.pop();
-        System.out.println("pop = " +  pop);
-        System.out.println("sanitized name = " + sanitizedElementName);
-        if(!sanitizedElementName.equals(pop)) throw new RuntimeException("This tag was not opened in JSXTree");
 
-        subTokens.add(new JSXElementName(sanitizedElementName));
+        if(!s.equals(pop)) throw new RuntimeException("This tag was not opened in JSXTree");
+
+        subTokens.add(new JSXElementName(s));
     }
 
+    @Override
+    public List<JSXToken> subTokens(){
+        return subTokens;
+    }
 }

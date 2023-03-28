@@ -10,11 +10,16 @@ public class JSXOpeningElement extends JSXToken {
     public JSXOpeningElement(String s) {
         super();
         subtokens = new ArrayList<>();
-        String sanitizedName = s.split(">")[0].trim();
 
-        this.validator.add(sanitizedName);
+        this.validator.add(s);
 
-        JSXElementName jsxElementName = new JSXElementName(sanitizedName);
+        JSXElementName jsxElementName = new JSXElementName(s);
         subtokens.add(jsxElementName);
     }
+
+    @Override
+    public List<JSXToken> subTokens(){
+        return subtokens;
+    }
+
 }
