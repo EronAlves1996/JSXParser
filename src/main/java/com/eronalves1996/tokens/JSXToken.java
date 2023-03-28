@@ -2,7 +2,6 @@ package com.eronalves1996.tokens;
 
 import com.eronalves1996.util.Either;
 
-import java.lang.reflect.Constructor;
 import java.util.*;
 
 public abstract class JSXToken {

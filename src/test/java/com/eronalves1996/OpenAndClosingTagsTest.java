@@ -30,31 +30,42 @@ public class OpenAndClosingTagsTest {
         List<JSXToken> topLevelTokens = tokens.topLevelTokens;
         topLevelTokens.stream().forEach(token -> {
             if(token instanceof JSXOpeningElement) {
-                List<JSXToken> jsxTokens = token.subTokens();
-                assertEquals(1, jsxTokens.size());
-
-                JSXElementName jsxElementName = (JSXElementName) jsxTokens.get(0);
-                assertEquals("div", jsxElementName.identifier);
+                assertElement(token)
+                        .subTokenQuantity(1)
+                        .has(JSXElementName.class)
+                        .innerNameIs("div");
             }
 
             if(token instanceof JSXChildren) {
-                List<JSXToken> jsxTokens = token.subTokens();
-
-                assertEquals(1, jsxTokens.size());
-                assertTrue(jsxTokens.get(0) instanceof JSXText);
-
-                assertEquals("This is a test text", ((JSXText) jsxTokens.get(0)).value);
+                assertElement(token)
+                        .subTokenQuantity(1)
+                        .has(JSXText.class)
+                        .innerTextIs("This is a test text");
             }
 
             if(token instanceof JSXClosingElement) {
-                List<JSXToken> jsxTokens = token.subTokens();
-                assertEquals(1, jsxTokens.size());
-
-                JSXElementName jsxElementName = (JSXElementName) jsxTokens.get(0);
-                assertEquals("div", jsxElementName.identifier);
+                assertElement(token)
+                        .subTokenQuantity(1)
+                        .has(JSXElementName.class)
+                        .innerNameIs("div");
             }
         });
     }
+
+    /*@Test
+    public void testShouldParseCorrectlyAttributes(){
+        JSX divElementWithTextAndAttributes = JSX.parse("""
+                <div class="test" id="test-id" style="color: blue">
+                    This is a test text
+                </div>
+                """);
+
+        JSXElement tokens = divElementWithTextAndAttributes.tokens;
+        List<JSXToken> topLevelTokens = tokens.topLevelTokens;
+
+    }
+
+     */
 
     private AssertToken assertElement(JSXToken token){
         return new AssertToken(){
@@ -87,6 +98,16 @@ public class OpenAndClosingTagsTest {
                 return assertElement(token);
             }
 
+            @Override
+            public AssertToken innerTextIs(String string) {
+                Optional<JSXToken> first = token.subTokens().stream().filter(t -> t.getClass() == JSXText.class).findFirst();
+                if (first.isEmpty()) throw new RuntimeException("Element don't have any JSXElementName");
+                JSXToken jsxToken = first.get();
+                String content = ((JSXText) jsxToken).value;
+                assertEquals(string, content);
+                return assertElement(token);
+            }
+
 
         };
     }
@@ -96,6 +117,7 @@ public class OpenAndClosingTagsTest {
         AssertToken subTokenQuantity(int qtd);
         AssertToken has (Class clazz);
         AssertToken innerNameIs(String string);
+        AssertToken innerTextIs(String string);
 
     }
 }
