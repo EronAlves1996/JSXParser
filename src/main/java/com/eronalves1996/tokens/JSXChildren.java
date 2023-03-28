@@ -1,11 +1,20 @@
 package com.eronalves1996.tokens;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class JSXChildren extends JSXToken {
-    private String childString;
+    private List<JSXToken> subTokens;
 
     public JSXChildren(String child){
         super();
-        this.childString = child;
+        subTokens = new ArrayList<>();
+        subTokens.add(new JSXText(child));
+    }
+
+    @Override
+    public List<JSXToken> subTokens(){
+        return subTokens;
     }
 
 }

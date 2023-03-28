@@ -2,9 +2,11 @@ package com.eronalves1996.tokens;
 
 public class JSXText extends JSXToken {
 
-    private String content;
+    public final String value;
 
-    public JSXText(String content) {
-        this.content = content;
+    public JSXText(String content){
+        this.value = content;
     }
+
+
 }

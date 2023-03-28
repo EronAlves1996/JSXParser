@@ -37,7 +37,7 @@ public class OpenAndClosingTagsTest {
                 assertEquals("div", jsxElementName.identifier);
             }
 
-            if(token instanceof JSXChild) {
+            if(token instanceof JSXChildren) {
                 List<JSXToken> jsxTokens = token.subTokens();
 
                 assertEquals(1, jsxTokens.size());

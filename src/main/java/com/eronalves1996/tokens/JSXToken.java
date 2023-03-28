@@ -73,7 +73,7 @@ public abstract class JSXToken {
 
         String[] strings = sliceStringIn(restString, restString.lastIndexOf("<"));
         Iterator<String> iterator = Arrays.stream(strings).iterator();
-        String childString = iterator.next().trim().replace("<", "").replace(">", "");
+        String childString = iterator.next().trim().replace("<", "").replace(">", "").trim();
         String tagName = iterator.next().trim().replace(">", "").replace("<", "");
 
 
