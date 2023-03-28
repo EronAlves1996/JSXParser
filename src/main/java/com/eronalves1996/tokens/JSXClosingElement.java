@@ -14,7 +14,7 @@ public class JSXClosingElement extends JSXToken {
 
         String pop = this.validator.pop();
 
-        if(!s.equals(pop)) throw new RuntimeException("This tag was not opened in JSXTree");
+        if(!s.equals(pop)) throw new RuntimeException("This tag was not opened in JSXTree, expected { " + s + " }, caught { " + pop + " }");
 
         subTokens.add(new JSXElementName(s));
     }

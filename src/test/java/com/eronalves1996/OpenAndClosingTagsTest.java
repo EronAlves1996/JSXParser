@@ -70,7 +70,7 @@ public class OpenAndClosingTagsTest {
                         .has(JSXAttributes.class)
                         .assertAttribute("class", "test")
                         .assertAttribute("id", "test-id")
-                        .assertAttribute("style", "color:blue");
+                        .assertAttribute("style", "color: blue");
             }
 
             if(token instanceof  JSXClosingElement){

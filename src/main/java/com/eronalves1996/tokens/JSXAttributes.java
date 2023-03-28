@@ -8,17 +8,25 @@ public class JSXAttributes extends JSXToken {
 
     private Map<String, String> attributes;
 
-    public JSXAttributes(List<String> unparsedAttributes) {
+    public JSXAttributes(String unparsedAttributes) {
         super();
         attributes = new HashMap<>();
         parseAttributes(unparsedAttributes);
     }
 
-    private void parseAttributes(List<String> unparsedAttributes) {
-        unparsedAttributes.stream().forEach(attr -> {
-            String[] nameAndValue = attr.split("=");
-            attributes.put(nameAndValue[0], nameAndValue[1].replaceAll("\"", ""));
-        });
+    private void parseAttributes(String unparsedAttributes) {
+        String carryString = unparsedAttributes;
+        while(!carryString.isEmpty()){
+            carryString = parseSingleAttribute(carryString);
+        }
+    }
+
+    private String parseSingleAttribute(String unparsedString){
+        String[] attributeNameAndRest = JSXToken.sliceStringIn(unparsedString, unparsedString.indexOf("="));
+        String rest = attributeNameAndRest[1].substring(1);
+        String[] attributeValueAndRest = sliceStringIn(rest, rest.substring(1).indexOf("\"") + 1);
+        attributes.put(attributeNameAndRest[0].trim(), attributeValueAndRest[0].substring(1).trim());
+        return attributeValueAndRest[1].substring(1).trim();
     }
 
     public boolean has(String type) {

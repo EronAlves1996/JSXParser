@@ -44,7 +44,10 @@ public abstract class JSXToken {
         return tokens;
     }
 
-    private static String[] sliceStringIn(String snippet, int index){
+    public static String[] sliceStringIn(String snippet, int index){
+        if(index == -1){
+            return new String[] {snippet};
+        }
         String left = snippet.substring(0, index);
         String right = snippet.substring(index);
         return new String[] {left, right};

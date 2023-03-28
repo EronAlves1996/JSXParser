@@ -10,23 +10,13 @@ public class JSXSelfClosingElement extends JSXToken {
     public JSXSelfClosingElement(String s){
         subTokens = new ArrayList<>();
 
-        System.out.println("new selfclosing=" + s);
-        String sanitizedElementInfo = s.replace("/>", "");
-        String[] unparsedSubTokens = sanitizedElementInfo.split(" ");
 
-        parseElementName(unparsedSubTokens);
-        parseAttributes(unparsedSubTokens);
-    }
+        String[] nameAndAttributes = JSXToken.sliceStringIn(s, s.indexOf(" "));
 
-    private void parseElementName(String[] unparsedSubTokens) {
-        JSXElementName name = new JSXElementName(unparsedSubTokens[0]);
-        subTokens.add(name);
-    }
+        subTokens.add(new JSXElementName(nameAndAttributes[0]));
 
-    private void parseAttributes(String[] unparsedSubTokens) {
-        if(unparsedSubTokens.length > 1){
-            JSXAttributes attributes = new JSXAttributes(Arrays.asList(unparsedSubTokens).subList(1, unparsedSubTokens.length));
-            subTokens.add(attributes);
+        if(nameAndAttributes.length > 1) {
+            subTokens.add(new JSXAttributes(nameAndAttributes[1].trim()));
         }
     }
 
