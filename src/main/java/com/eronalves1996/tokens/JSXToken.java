@@ -77,7 +77,7 @@ public abstract class JSXToken {
         return List.of(jsxChild, defineTag(tagName));
     }
 
-    private static JSXToken defineTag(String tagIdentifier) {
+    protected static JSXToken defineTag(String tagIdentifier) {
         if(tagIdentifier.endsWith("/")) return new JSXSelfClosingElement(tagIdentifier.substring(0, tagIdentifier.length() - 2));
         if(tagIdentifier.startsWith("/")) return new JSXClosingElement(tagIdentifier.substring(1));
         return new JSXOpeningElement(tagIdentifier);
