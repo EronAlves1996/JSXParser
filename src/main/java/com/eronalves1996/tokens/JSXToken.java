@@ -15,7 +15,6 @@ public abstract class JSXToken {
     public static JSXElement tokenize(String code) {
         return new JSXElement(mountJSXTokenTree(code));
     }
-
     private static List<JSXToken> mountJSXTokenTree(String code){
         ArrayList<JSXToken> tokens = new ArrayList<>();
         code = code.trim();
@@ -44,14 +43,6 @@ public abstract class JSXToken {
         return tokens;
     }
 
-    public static String[] sliceStringIn(String snippet, int index){
-        if(index == -1){
-            return new String[] {snippet};
-        }
-        String left = snippet.substring(0, index);
-        String right = snippet.substring(index);
-        return new String[] {left, right};
-    }
 
     private static List<Either<String, JSXToken>> parseTopLevelElement(String code){
         if(!code.startsWith("<")) {
@@ -68,6 +59,8 @@ public abstract class JSXToken {
         return List.of(new Either(null, defineTag(elementName)), new Either(end, null));
     }
 
+
+
     private static List<JSXToken> parseRestString(String restString){
         if(!restString.endsWith(">")){
             throw new RuntimeException("There's no closing tag");
@@ -75,7 +68,7 @@ public abstract class JSXToken {
 
         String[] strings = sliceStringIn(restString, restString.lastIndexOf("<"));
         Iterator<String> iterator = Arrays.stream(strings).iterator();
-        String childString = iterator.next().trim().replace("<", "").replace(">", "").trim();
+        String childString = iterator.next().substring(1).trim();
         String tagName = iterator.next().trim().replace(">", "").replace("<", "");
 
 
@@ -90,6 +83,14 @@ public abstract class JSXToken {
         return new JSXOpeningElement(tagIdentifier);
     }
 
+    protected static String[] sliceStringIn(String snippet, int index){
+        if(index == -1){
+            return new String[] {snippet};
+        }
+        String left = snippet.substring(0, index);
+        String right = snippet.substring(index);
+        return new String[] {left, right};
+    }
 
     public List<JSXToken> subTokens(){
         return new ArrayList<>();

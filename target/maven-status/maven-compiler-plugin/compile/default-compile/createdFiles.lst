@@ -1,11 +1,11 @@
 com/eronalves1996/util/Either.class
 com/eronalves1996/tokens/JSXElement.class
-com/eronalves1996/tokens/JSXSelfClosingElement.class
 com/eronalves1996/tokens/JSXText.class
 com/eronalves1996/JSX.class
+com/eronalves1996/tokens/JSXChildren.class
+com/eronalves1996/tokens/JSXSelfClosingElement.class
 com/eronalves1996/tokens/JSXToken.class
 com/eronalves1996/tokens/JSXClosingElement.class
 com/eronalves1996/tokens/JSXOpeningElement.class
-com/eronalves1996/tokens/JSXChildren.class
 com/eronalves1996/tokens/JSXAttributes.class
 com/eronalves1996/tokens/JSXElementName.class

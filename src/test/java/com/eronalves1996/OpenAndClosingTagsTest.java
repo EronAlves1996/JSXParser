@@ -80,6 +80,18 @@ public class OpenAndClosingTagsTest {
         });
     }
 
+    @Test
+    public void testShouldParseCorrectlyATagInsideATag(){
+        JSX tagInsideATag = JSX.parse("""
+                <div>
+                    <div>
+                        That's a text
+                    </div>
+                </div>
+                """);
+        System.out.println(tagInsideATag);
+    }
+
     private AssertToken assertElement(JSXToken token){
         return new AssertToken(){
             @Override

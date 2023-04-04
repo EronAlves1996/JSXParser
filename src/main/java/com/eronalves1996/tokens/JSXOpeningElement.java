@@ -1,7 +1,6 @@
 package com.eronalves1996.tokens;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class JSXOpeningElement extends JSXToken {
@@ -31,4 +30,10 @@ public class JSXOpeningElement extends JSXToken {
         return subtokens;
     }
 
+    @Override
+    public String toString() {
+        return "JSXOpeningElement{" +
+                "subtokens=" + subtokens +
+                '}';
+    }
 }

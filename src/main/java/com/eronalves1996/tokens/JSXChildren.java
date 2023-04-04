@@ -17,4 +17,10 @@ public class JSXChildren extends JSXToken {
         return subTokens;
     }
 
+    @Override
+    public String toString() {
+        return "JSXChildren{" +
+                "subTokens=" + subTokens +
+                '}';
+    }
 }

@@ -23,4 +23,11 @@ public class JSXClosingElement extends JSXToken {
     public List<JSXToken> subTokens(){
         return subTokens;
     }
+
+    @Override
+    public String toString() {
+        return "JSXClosingElement{" +
+                "subTokens=" + subTokens +
+                '}';
+    }
 }

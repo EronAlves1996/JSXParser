@@ -63,9 +63,13 @@ public class SelfClosingTagTest {
 
     @Test
     public void testParseElementWithManyAttributes(){
+        System.out.println("""
+                <input type="password" id="ximenes" class="mauricio-vieira" />
+                """);
         JSX inputWithManyAttributes = JSX.parse("""
                 <input type="password" id="ximenes" class="mauricio-vieira" />
                 """);
+        System.out.println(inputWithManyAttributes);
         JSXElement tokens = inputWithManyAttributes.tokens;
         JSXToken topLevelToken = tokens.topLevelTokens.get(0);
 
@@ -92,6 +96,9 @@ public class SelfClosingTagTest {
     @Test
     public void testDifferentSelfClosedTagWithManyAttributes(){
         JSX imgTag = JSX.parse("""
+                <img src="file/xscap" width="100" />
+                """);
+        System.out.println("""
                 <img src="file/xscap" width="100" />
                 """);
         System.out.println(imgTag);

@@ -8,5 +8,10 @@ public class JSXText extends JSXToken {
         this.value = content;
     }
 
-
+    @Override
+    public String toString() {
+        return "JSXText{" +
+                "value='" + value + '\'' +
+                '}';
+    }
 }
