@@ -49,14 +49,14 @@ public class JSXChildren extends JSXToken {
                 return List.of(new JSXText(token));
             });
             List<JSXToken> collect = listStream.flatMap(Collection::stream).filter(Objects::nonNull).toList();
-            List<JSXToken> flatten = flatten(collect);
-            System.out.println(flatten);
+
+            List<JSXToken> processed = groupInChildrens(collect);
         } else subTokens.add(new JSXText(child));
     }
 
-    private List<JSXToken> flatten(List<JSXToken> unflattenedTokens){
+    private List<JSXToken> groupInChildrens(List<JSXToken> allTokens){
 
-        Iterator<JSXToken> tokenIterator = unflattenedTokens.iterator();
+        Iterator<JSXToken> tokenIterator = allTokens.iterator();
         List<JSXToken> flattenedList = new ArrayList<>();
         String identifierName = "";
 
@@ -79,7 +79,7 @@ public class JSXChildren extends JSXToken {
         return flattenedList;
     }
 
-    private JSXToken flatten(Iterator<JSXToken> tokenIterator, JSXChildren children, String referenceIdentifier){
+    private JSXToken groupInChildrens(Iterator<JSXToken> tokenIterator, JSXChildren children, String referenceIdentifier){
 
         while(tokenIterator.hasNext()){
             JSXToken nextToken = tokenIterator.next();
