@@ -14,7 +14,7 @@ public abstract class JSXToken {
     }
 
     public static JSXElement tokenize(String code) {
-        return new JSXElement(mountJSXTokenTree(code));
+        return mountJSXTokenTree(code);
     }
 
     private static JSXElement mountJSXTokenTree(String code) {
