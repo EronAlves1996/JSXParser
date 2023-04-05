@@ -1,7 +1,5 @@
 package com.eronalves1996.tokens;
 
-import com.eronalves1996.util.Either;
-
 import java.util.*;
 import java.util.stream.Stream;
 
