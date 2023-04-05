@@ -17,6 +17,7 @@ public class OpenAndClosingTagsTest {
                 <html>
                 </html>
                 """));
+
     }
 
     @Test
@@ -86,6 +87,12 @@ public class OpenAndClosingTagsTest {
                 <div>
                     <div>
                         That's a text
+                        <div>
+                            That's another text
+                            <p>With a paragraph</p>
+                            <ul><li>one</li><li>two</li></ul>
+                            Rest Text for testing
+                        </div>
                     </div>
                 </div>
                 """);
