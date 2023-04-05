@@ -27,14 +27,19 @@ public class JSXChildren extends JSXToken {
         if (split.length > 1) {
             Stream<List<JSXToken>> listStream = Arrays.stream(split).map(token -> {
                 if (token.startsWith("<")) {
-                    String substring = token.substring(1);
+                    String substring = token.substring(1).trim();
+                    if(substring.isEmpty()) return null;
                     return List.of(JSXToken.defineTag(substring));
                 }
 
                 if (token.contains("<")) {
                     String[] split1 = token.split("<");
                     List<JSXToken> tokens = new ArrayList<>();
-                    tokens.add(new JSXText(split1[0].trim()));
+                    String text = split1[0].trim();
+
+                    if(text.isEmpty()) tokens.add(null);
+                    else tokens.add(new JSXText(text));
+
                     tokens.add(JSXToken.defineTag(split1[1].trim()));
                     return tokens;
                 }
