@@ -58,22 +58,23 @@ public class JSXChildren extends JSXToken {
 
         Iterator<JSXToken> tokenIterator = allTokens.iterator();
         List<JSXToken> flattenedList = new ArrayList<>();
-        String identifierName = "";
 
         while(tokenIterator.hasNext()){
             JSXToken nextToken = tokenIterator.next();
-            if(List.of(JSXOpeningElement.class, JSXClosingElement.class, JSXSelfClosingElement.class).contains(nextToken.getClass())){
-                flattenedList.add(nextToken);
-                if(nextToken.getClass() == JSXOpeningElement.class){
-                    identifierName = ((JSXOpeningElement) nextToken).getIdentifier();
-                }
-            }
-            else {
+
+            if(JSXOpeningElement.class == nextToken.getClass()){
                 JSXChildren children = new JSXChildren();
-                flattenedList.add(children);
-                children.addToken(nextToken);
-                JSXToken closingTag = flatten(tokenIterator, children, identifierName);
-                flattenedList.add(closingTag);
+                List<JSXToken> elementTokens =  new ArrayList<>();
+                elementTokens.addAll(List.of(nextToken, children));
+
+                String identifierName = ((JSXOpeningElement) nextToken).getIdentifier();
+                JSXToken jsxToken = groupInChildrens(tokenIterator, children, identifierName);
+
+                elementTokens.add(jsxToken);
+                flattenedList.add(new JSXElement(elementTokens));
+            }
+            else if(nextToken.getClass() == JSXSelfClosingElement.class){
+                flattenedList.add(new JSXElement(List.of(nextToken)));
             }
         }
         return flattenedList;
@@ -84,12 +85,14 @@ public class JSXChildren extends JSXToken {
         while(tokenIterator.hasNext()){
             JSXToken nextToken = tokenIterator.next();
             if(JSXOpeningElement.class == nextToken.getClass()){
-                children.addToken(nextToken);
+                List<JSXToken> elementList = new ArrayList<>();
+                elementList.add(nextToken);
                 String newReferenceIdentifier = ((JSXOpeningElement) nextToken).getIdentifier();
                 JSXChildren subChildren = new JSXChildren();
-                children.addToken(subChildren);
-                JSXToken closingTag = flatten(tokenIterator, subChildren, newReferenceIdentifier);
-                children.addToken(closingTag);
+                elementList.add(subChildren);
+                JSXToken closingTag = groupInChildrens(tokenIterator, subChildren, newReferenceIdentifier);
+                elementList.add(closingTag);
+                children.addToken(new JSXElement(elementList));
             }
             else if(nextToken.getClass() == JSXClosingElement.class){
                 String identifier = ((JSXClosingElement) nextToken).getIdentifier();
