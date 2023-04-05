@@ -3,6 +3,7 @@ package com.eronalves1996.tokens;
 import com.eronalves1996.util.Either;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 public abstract class JSXToken {
 
@@ -15,66 +16,105 @@ public abstract class JSXToken {
     public static JSXElement tokenize(String code) {
         return new JSXElement(mountJSXTokenTree(code));
     }
-    private static List<JSXToken> mountJSXTokenTree(String code){
-        ArrayList<JSXToken> tokens = new ArrayList<>();
-        code = code.trim();
 
-        List<Either<String, JSXToken>> firstElementAndRestString = parseTopLevelElement(code);
-        Either<String, JSXToken> firstToken = firstElementAndRestString.get(0);
-        Either<String, JSXToken> restString = firstElementAndRestString.get(1);
+    private static JSXElement mountJSXTokenTree(String code) {
+        String[] split = code.split(">");
+        if (split.length > 1) {
+            Stream<List<JSXToken>> listStream = Arrays.stream(split).map(token -> {
+                if (token.startsWith("<")) {
+                    String substring = token.substring(1).trim();
+                    if(substring.isEmpty()) return null;
+                    return List.of(JSXToken.defineTag(substring));
+                }
 
-        if(firstToken.right.isPresent()) {
-            JSXToken jsxToken = firstToken.right.get();
-            if (jsxToken instanceof JSXSelfClosingElement) {
-                if (restString.right.isPresent())
-                    throw new RuntimeException("There should only one self closing tag element on top level");
-                tokens.add(jsxToken);
-                return tokens;
+                if (token.contains("<")) {
+                    String[] split1 = token.split("<");
+                    List<JSXToken> tokens = new ArrayList<>();
+                    String text = split1[0].trim();
+
+                    if(text.isEmpty()) tokens.add(null);
+                    else tokens.add(new JSXText(text));
+
+                    tokens.add(JSXToken.defineTag(split1[1].trim()));
+                    return tokens;
+                }
+
+                if (token.isEmpty()) return List.of(null);
+
+                return List.of(new JSXText(token));
+            });
+
+            JSXToken jsxToken = Optional.of(
+                            listStream
+                                    .flatMap(Collection::stream)
+                                    .filter(Objects::nonNull)
+                                    .toList()
+                    )
+                    .map(JSXToken::groupInChildrens)
+                    .get()
+                    .get(0);
+
+            return (JSXElement) jsxToken;
+        }
+
+        else return new JSXElement(List.of(new JSXText(code)));
+    }
+
+    private static List<JSXToken> groupInChildrens(List<JSXToken> allTokens){
+
+        Iterator<JSXToken> tokenIterator = allTokens.iterator();
+        List<JSXToken> flattenedList = new ArrayList<>();
+
+        while(tokenIterator.hasNext()){
+            JSXToken nextToken = tokenIterator.next();
+
+            if(JSXOpeningElement.class == nextToken.getClass()){
+                JSXChildren children = new JSXChildren();
+                List<JSXToken> elementTokens =  new ArrayList<>();
+                elementTokens.addAll(List.of(nextToken, children));
+
+                String identifierName = ((JSXOpeningElement) nextToken).getIdentifier();
+                JSXToken jsxToken = groupInChildrens(tokenIterator, children, identifierName);
+
+                elementTokens.add(jsxToken);
+                flattenedList.add(new JSXElement(elementTokens));
             }
-            if (jsxToken instanceof JSXOpeningElement) {
-                tokens.add(jsxToken);
-                if (restString.left.isPresent()) {
-                    List<JSXToken> jsxTokens = parseRestString(restString.left.get());
-                    tokens.addAll(jsxTokens);
+            else if(nextToken.getClass() == JSXSelfClosingElement.class){
+                flattenedList.add(new JSXElement(List.of(nextToken)));
+            }
+        }
+        return flattenedList;
+    }
+
+    private static JSXToken groupInChildrens(Iterator<JSXToken> tokenIterator, JSXChildren children, String referenceIdentifier){
+
+        while(tokenIterator.hasNext()){
+            JSXToken nextToken = tokenIterator.next();
+            if(JSXOpeningElement.class == nextToken.getClass()){
+                List<JSXToken> elementList = new ArrayList<>();
+                elementList.add(nextToken);
+                String newReferenceIdentifier = ((JSXOpeningElement) nextToken).getIdentifier();
+                JSXChildren subChildren = new JSXChildren();
+                elementList.add(subChildren);
+                JSXToken closingTag = groupInChildrens(tokenIterator, subChildren, newReferenceIdentifier);
+                elementList.add(closingTag);
+                children.addToken(new JSXElement(elementList));
+            }
+            else if(nextToken.getClass() == JSXClosingElement.class){
+                String identifier = ((JSXClosingElement) nextToken).getIdentifier();
+                if(identifier.equals(referenceIdentifier)) {
+                    if(children.subTokens().isEmpty()){
+                        throw new RuntimeException("You should use a self closing tag on <" + identifier + ">" );
+                    }
+                    return nextToken;
                 }
             }
+            else {
+                children.addToken(nextToken);
+            }
         }
 
-        return tokens;
-    }
-
-
-    private static List<Either<String, JSXToken>> parseTopLevelElement(String code){
-        if(!code.startsWith("<")) {
-            return List.of(new Either(null, new JSXText(code)));
-        }
-
-        String[] partition = sliceStringIn(code, code.indexOf(">"));
-        Iterator<String> partitionIter = Arrays.stream(partition).iterator();
-        String initial = partitionIter.next().trim();
-        String end = partitionIter.next().trim();
-
-        String elementName = initial.replace("<", "");
-
-        return List.of(new Either(null, defineTag(elementName)), new Either(end, null));
-    }
-
-
-
-    private static List<JSXToken> parseRestString(String restString){
-        if(!restString.endsWith(">")){
-            throw new RuntimeException("There's no closing tag");
-        }
-
-        String[] strings = sliceStringIn(restString, restString.lastIndexOf("<"));
-        Iterator<String> iterator = Arrays.stream(strings).iterator();
-        String childString = iterator.next().substring(1).trim();
-        String tagName = iterator.next().trim().replace(">", "").replace("<", "");
-
-
-        if(childString.isEmpty()) return List.of(defineTag(tagName));
-        JSXChildren jsxChild = new JSXChildren(childString);
-        return List.of(jsxChild, defineTag(tagName));
+        return null;
     }
 
     protected static JSXToken defineTag(String tagIdentifier) {
