@@ -19,6 +19,11 @@ public class JSXClosingElement extends JSXToken {
         subTokens.add(new JSXElementName(s));
     }
 
+    public String getIdentifier(){
+        JSXToken jsxToken = subTokens.stream().filter(t -> t.getClass() == JSXElementName.class).findFirst().get();
+        return ((JSXElementName) jsxToken).identifier;
+    }
+
     @Override
     public List<JSXToken> subTokens(){
         return subTokens;

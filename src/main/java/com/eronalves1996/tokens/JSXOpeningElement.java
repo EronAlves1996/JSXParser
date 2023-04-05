@@ -25,6 +25,11 @@ public class JSXOpeningElement extends JSXToken {
 
     }
 
+    public String getIdentifier(){
+        JSXToken jsxToken = subtokens.stream().filter(t -> t.getClass() == JSXElementName.class).findFirst().get();
+        return ((JSXElementName) jsxToken).identifier;
+    }
+
     @Override
     public List<JSXToken> subTokens(){
         return subtokens;
